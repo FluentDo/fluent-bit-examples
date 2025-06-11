@@ -1,6 +1,9 @@
 #!/bin/bash
 set -eu
 
+# Get current script directory
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 # Check if Helm is installed
 if ! command -v helm &> /dev/null; then
     echo "Helm is not installed. Please install Helm first."
@@ -45,6 +48,7 @@ helm upgrade --install loki-stack grafana/loki-stack \
     --version "${GRAFANA_CHART_VERSION}" \
     --set grafana.enabled=true,prometheus.enabled=true,promtail.enabled=false \
     --set grafana.adminPassword="${GRAFANA_ADMIN_PASSWORD}" \
+    --values "${VALUES_FILE:-"$SCRIPT_DIR/values.yaml"}" \
     --wait
 
 # Forward to the Grafana service
