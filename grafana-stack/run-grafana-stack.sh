@@ -25,6 +25,7 @@ helm repo add grafana https://grafana.github.io/helm-charts --force-update
 helm repo update --fail-on-repo-update-fail
 
 NAMESPACE=${NAMESPACE:-grafana}
+echo "Using namespace: ${NAMESPACE}"
 # Create the namespace if it doesn't exist
 kubectl create namespace "${NAMESPACE}" --dry-run=client -o yaml | kubectl apply -f -
 # Check if the namespace was created successfully
