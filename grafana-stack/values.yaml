@@ -1,4 +1,11 @@
+prometheus:
+  enabled: true
+promtail:
+  enabled: false
+
 grafana:
+  enabled: true
+
   dashboardProviders:
     dashboardproviders.yaml:
       apiVersion: 1

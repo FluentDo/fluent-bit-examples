@@ -46,7 +46,6 @@ helm upgrade --install loki-stack grafana/loki-stack \
     --namespace "${NAMESPACE}" \
     --create-namespace \
     --version "${GRAFANA_CHART_VERSION}" \
-    --set grafana.enabled=true,prometheus.enabled=true,promtail.enabled=false \
     --set grafana.adminPassword="${GRAFANA_ADMIN_PASSWORD}" \
     --values "${VALUES_FILE:-"$SCRIPT_DIR/values.yaml"}" \
     --wait
