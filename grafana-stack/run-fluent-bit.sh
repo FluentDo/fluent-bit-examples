@@ -30,6 +30,6 @@ echo "Using namespace: ${NAMESPACE}"
 helm upgrade --install fluent-bit fluent/fluent-bit \
     --namespace "${NAMESPACE}" \
     --create-namespace \
-    --values "${VALUES_FILE:-"$SCRIPT_DIR/values.yaml"}" \
+    --values "${VALUES_FILE:-"$SCRIPT_DIR/values-fluent-bit.yaml"}" \
     --wait
 
