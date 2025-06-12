@@ -9,7 +9,7 @@ services:
       - ./otel-config.yaml:/etc/otelcol-contrib/config.yaml
     command: ["--config", "/etc/otelcol-contrib/config.yaml"]
   fluent-bit:
-    image: fluent/fluent-bit:latest
+    image: fluent/fluent-bit:4.0.3
     container_name: fluent-bit
     network_mode: host
     volumes:
