@@ -1,0 +1,23 @@
+service:
+  log_level: info
+pipeline:
+  inputs:
+    - name: dummy
+      tag: test
+      dummy: '{"key1": "value1", "key2": "value2"}'
+      processors:
+        logs:
+          - name: opentelemetry_envelope
+  outputs:
+    - name: opentelemetry
+      match: "*"
+      logs_body_key: key2
+      host: 127.0.0.1
+      port: 4318
+      tls: off
+      metrics_uri: /v1/metrics
+      logs_uri: /v1/logs
+      traces_uri: /v1/traces
+      log_response_payload: true
+    - name: stdout
+      match: "*"

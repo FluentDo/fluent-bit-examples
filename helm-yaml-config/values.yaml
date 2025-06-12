@@ -1,0 +1,26 @@
+config:
+  extraFiles:
+    fluent-bit.yaml: |
+      service:
+        # Required for health checks
+        http_server: on
+      pipeline:
+        inputs:
+          - name: tail
+            tag: kube.*
+            path: /var/log/containers/*.log
+            multiline.parser: docker, cri
+            Skip_Long_Lines: On
+            processors:
+              logs:
+                - name: kubernetes
+                  kube_tag_prefix: kube.var.log.containers.
+                  merge_log: on
+
+        outputs:
+          - name: stdout
+            match: "*"
+
+args:
+  - --workdir=/fluent-bit/etc
+  - --config=/fluent-bit/etc/conf/fluent-bit.yaml
