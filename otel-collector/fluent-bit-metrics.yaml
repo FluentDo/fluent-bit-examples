@@ -4,6 +4,9 @@ pipeline:
   inputs:
     - name: fluentbit_metrics
       tag: metrics
+      processors:
+        logs:
+          - name: opentelemetry_envelope
   outputs:
     - name: opentelemetry
       match: "*"

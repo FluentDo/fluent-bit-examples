@@ -4,6 +4,9 @@ pipeline:
   inputs:
     - name: dummy
       tag: test
+      processors:
+        logs:
+          - name: opentelemetry_envelope
   outputs:
     - name: opentelemetry
       match: "*"
