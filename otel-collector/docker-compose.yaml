@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.128.0
+    container_name: otel-collector
+    ports:
+      - "4318:4318"  # OpenTelemetry receiver
+    volumes:
+      - ./otel-config.yaml:/etc/otelcol-contrib/config.yaml
+    command: ["--config", "/etc/otelcol-contrib/config.yaml"]
+  fluent-bit:
+    image: fluent/fluent-bit:latest
+    container_name: fluent-bit
+    network_mode: host
+    volumes:
+      - ./fluent-bit.yaml:/fluent-bit/etc/fluent-bit.yaml
+    command: ["-c", "/fluent-bit/etc/fluent-bit.yaml"]
+    depends_on:
+      - otel-collector
