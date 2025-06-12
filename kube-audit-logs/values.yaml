@@ -1,0 +1,20 @@
+config:
+  extraFiles:
+    fluent-bit.yaml: |
+      service:
+        # Required for health checks
+        http_server: on
+      pipeline:
+        inputs:
+          - name: tail
+            tag: audit
+            path: /var/log/kubernetes/kube-apiserver-audit.log
+            parser: json
+
+        outputs:
+          - name: stdout
+            match: "*"
+
+args:
+  - --workdir=/fluent-bit/etc
+  - --config=/fluent-bit/etc/conf/fluent-bit.yaml
