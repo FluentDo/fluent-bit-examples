@@ -6,9 +6,10 @@ A [`values.yaml`](values.yaml) is provided that can be passed to the [OSS helm c
 
 A [`run-fluent-bit.sh`](run-fluent-bit.sh) launch script is provided to deploy this all to an existing K8S cluster.
 
-# KIND set up
+## KIND set up
 
 To deploy with KIND the two configuration files are provided:
+
 - [`audit-policy.yaml`](./audit-policy.yaml) to provide an audit logging policy.
 - [`kind-config.yaml`](./kind-config.yaml) to provide the actual KIND configuration to mount and use the policy.
 
